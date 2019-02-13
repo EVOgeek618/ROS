@@ -3,7 +3,7 @@
 #include <iostream>                                                             
 using namespace std;                                                            
 void fun(const std_msgs::Int32 a){                                              
-        cout<<"/subscriber: data: "<<a.data;                                    
+        cout<<"/subscriber: data: "<<a.data<<"\n";                                    
 return;                                                                         
 }                                                                               
                                                                                 
