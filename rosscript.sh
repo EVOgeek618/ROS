@@ -4,10 +4,10 @@ files()
 {
 (for i in $1/*
 do
-if [[ ${i: -4:1} == "." || ${i: -3:1} == "." || ${i: -5:1} == "." ]]; then
-w=${i: -4}
+if [[ $($i| rev|cut -f1 -d .|rev) == $i]]; then
+w='-'
 else
-w="-"
+w=$($i| rev|cut -f1 -d .|rev)
 fi
 r=$(expr length $i)
 d=3
