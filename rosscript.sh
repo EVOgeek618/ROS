@@ -4,21 +4,21 @@ files()
 {
 (for i in $1/*
 do
-if [[ ${i#*.} == $i ]]; then
-w="-"
+if [[ ${i: -4:1} == "." || ${i: -3:1} == "." || ${i: -5:1} == "." ]]; then
+w=${i: -4}
 else
-w=${i#*.}
+w="-"
 fi
 r=$(expr length $i)
 d=3
 e=$(($r+$d))
-if [[ $w == "mkv" || $w == "mp4" ]]; then
+if [[ $w == ".mkv" || $w == ".mp4" ]]; then
 echo $(stat --printf="%n" $i|rev|cut -f1 -d /|rev),$w,$(stat --printf="%s,%w,%z" $i),$(file $i | cut -c$e-| sed 's/,//g'
 ),$(mediainfo $i|head -n7|tail -n1|cut -c44-)
-elif [[ $w == "mp3" ]]; then
+elif [[ $w == ".mp3" ]]; then
 echo $(stat --printf="%n" $i|rev|cut -f1 -d /|rev),$w,$(stat --printf="%s,%w,%z" $i),$(file $i | cut -c$e-| sed 's/,//g'
 ),$(mediainfo $i|head -n5|tail -n1|cut -c44-)
-elif [[ $w == "avi" ]]; then
+elif [[ $w == ".avi" ]]; then
 echo $(stat --printf="%n" $i|rev|cut -f1 -d /|rev),$w,$(stat --printf="%s,%w,%z" $i),$(file $i | cut -c$e-| sed 's/,//g'
 ),$(mediainfo $i|head -n6|tail -n1|cut -c44-)
 elif [[ -d $i ]]; then
